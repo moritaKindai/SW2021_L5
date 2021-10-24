@@ -1,31 +1,27 @@
+<% if current_user %>
+  <%= link_to 'ログアウト', top_logout_path %>
+<% else %>
+  <%= link_to 'ログイン', top_main_path %>
+<% end %>
+
+<%= link_to 'ユーザー登録', users_path %>
+
+<% if current_user %>
+  <%= link_to '新規ツイート', new_tweet_path %>
+<% end %>
+
+<br>
+
 <% @tweets.each do |e| %>
   <p>
     <%= e.message %>
     <% if current_user %>
       <%= link_to '削除', tweet_path(e), method: :delete %>
       <% if e.likes.count > 0 %>
-        <%= link_to 'いいね削除', like_path(e), method: :delete %>
+        <%= link_to '💛', like_path(e), method: :delete %>
       <% else %>
-        <%= link_to 'いいね', likes_path(tweet_id: e.id), method: :post %>
+        <%= link_to '♡', likes_path(tweet_id: e.id), method: :post %>
       <% end %>
     <% end %>
     </p>
 <% end %>
-
-<p> 
-<% if current_user %>
-  <%= link_to 'ツイートする', new_tweet_path %>
-<% end %>
-</p>
-
-<p>
-<% if current_user %>
-  <%= link_to 'ログアウト', top_logout_path %>
-<% else %>
-  <%= link_to 'ログイン', top_main_path %>
-<% end %>
-</p>
-
-<p>
-  <%= link_to 'ユーザ一覧', users_path %>
-</p>
